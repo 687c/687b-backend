@@ -1,43 +1,80 @@
 // const User = require('../models/user');
+const axios = require('axios');
+const config = require('../utils/config');
+const { uploadToPinata } = require('../utils/pinFile');
 const Product = require('../models/product');
 
 const getAllProducts = async (req, res) => {
-    // try {
-    //     const resp = await Product.find({});
-    //     res.json(resp);
-    // } catch (err) {
-    //     console.log("error encountered while fetching all products ->", err);
-    //     resp.status(500).json({ "error": err.message });
-    // }
-    res.send("this is the one");
+    try {
+        const resp = await Product.find({});
+        res.json(resp);
+    } catch (err) {
+        console.error("error finding the products", err);
+        res.status(500).send({ message: "error fetching products from Mongo" });
+    }
 }
 
 const createProduct = async (req, res) => {
-    const { body } = req;
+    const { body, file } = req;
 
-    //do  uploading to ipfs here
-    //after grabbing the image from the body object
+    //CHECK IF THE FILE && BODY EXIST, ELSE SEND A 404
+    if (!file || !body) {
+        res.status(404).send({ error: "missing body argument" });
+        return;
+    }
 
-    const productObject = {
+    let resp;
+    try {
+        const { path, originalname } = file;
+        resp = await uploadToPinata(path, originalname);
+        console.log("the pinning resp", resp);
+    } catch (err) {
+        res.status(500).send({ err: err.message }).end();
+        console.error(err);
+        return;
+    }
+
+    const ipfsHash = resp.data.IpfsHash;
+
+    const productObject = new Product({
         title: body.title,
         price: body.price,
         description: body.description,
-        image_uri: body.image_uri,
-        hash: body.hash,
-    }
+        sellerAddress: body.sellerAddress,
+        ipfsHash
+    });
 
     try {
-        // const resp = await Product.save(productObject);
-        // res.json(resp);
-        res.json(productObject); //REMOVE THIS
+        const resp = await productObject.save();
+        res.json(resp);
+        // res.json(productObject); //REMOVE THIS
     } catch (err) {
         console.error("error creating a product", err);
-        res.json({ "error": err.message });
+        res.status(500).json({ "error": err.message });
+    }
+}
+
+const testAuthentication = async (req, res) => {
+    const url = "https://api.pinata.cloud/data/testAuthentication";
+
+    try {
+        // console.log("here", `${config.PINATA_JWT_KEY}`);
+
+        const resp = await axios.get(url, {
+            headers: {
+                'Authorization': `Bearer ${config.PINATA_JWT_KEY}`
+            }
+        });
+
+        console.log(resp.data);
+        res.json(resp.data);
+    } catch (err) {
+        console.error("error testing auth", err.message);
     }
 }
 
 const testFail = async (req, res) => {
-	res.status(500).send({message: "you messed up"});
+    res.status(500).send({ message: "you messed up" });
 }
 
-module.exports = { getAllProducts, createProduct, testFail }
+module.exports = { getAllProducts, createProduct, testFail, testAuthentication }
