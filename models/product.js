@@ -9,11 +9,7 @@ const productSchema = mongoose.Schema({
         type: Number,
         required: true
     },
-    hash: {
-        type: String,
-        required: true
-    },
-    image_uri: {
+    ipfsHash: {
         type: String,
         required: true
     },
