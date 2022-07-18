@@ -1,6 +1,7 @@
 Questions to look into
 - what if a product has been sold? How will you prevent it from being listed in the marketplace
 - in the real world how would this make money? We charge platform fees. So, on-top of solana's fees, we add our own fess, say .0020$ 
+- Do not a seller to be able to buy from himself
 
 # What This does
 - allow anyone to post a product and sell it
