@@ -27,7 +27,7 @@ const uploadToPinata = async (filePath, name) => {
         return resp;
     } catch (err) {
         console.log("error pinnning file -> ", err.message);
-        return;
+        return err;
     }
 };
 
