@@ -7,4 +7,6 @@ productRoute.post("/create", productController.createProduct);
 
 productRoute.get("/fail", productController.testFail);
 
+productRoute.get("/auth", productController.testAuthentication);
+
 module.exports = productRoute;
