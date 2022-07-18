@@ -34,7 +34,7 @@ const buyProduct = async (req, res) => {
 
     try {
         //GET THE SELLER AND BUYER ADDRESS
-        const usdcAddress = new PublicKey("Gh9ZwEmdLJ8DscKNTkTqPbNwLNNBjuSzaG9Vp2KGtKJr"); //token account
+        const usdcAddress = new PublicKey("Gh9ZwEmdLJ8DscKNTkTqPbNwLNNBjuSzaG9Vp2KGtKJr"); //token account for usdc
         const buyerPublicKey = new PublicKey(buyerAddress);
         const sellerAddress = product.sellerAddress.toString();
         const sellerPublicKey = new PublicKey(sellerAddress);
