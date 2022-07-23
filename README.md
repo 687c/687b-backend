@@ -1,5 +1,7 @@
 ![687b-frontend](https://socialify.git.ci/jim4067/687b-backend/image?font=Raleway&language=1&name=1&owner=1&pattern=Brick%20Wall&theme=Dark)
 
+## :construction: WIP :construction:
+
 ## project Profile
 
 687b was built as an online marketplace built on the Solana protocol that allows any buyer to post a product, display it on the marketplace and get potential customers for it.
