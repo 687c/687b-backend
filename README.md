@@ -6,7 +6,7 @@
 
 ## Tech stack 💻
 
-This is a + + + [solana] project and I am using the following libraries.
+This is a [solana] project and I am using the following libraries and framework.
 
 This is a JavaScript single page application built with the following libraries and frameworks
 
