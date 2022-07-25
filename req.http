@@ -1,10 +1,21 @@
-POST http://localhost:3040/api/v1/product/create
-Content-Type: application/json
+# POST http://localhost:3040/api/v1/product/create
+# Content-Type: application/json
 
-{
-    "name":"laundry 2.0",
-    "price" : "23542350",
-    "description" : "clean clothes maketh the man",
-    "image_uri" : "https://23423",
-    "hash": "hgoih2t0934"
-}
+# {
+#     "name":"laundry 2.0",
+#     "price" : "23542350",
+#     "description" : "clean clothes maketh the man",
+#     "image_uri" : "https://23423",
+#     "hash": "hgoih2t0934"
+# }
+
+GET http://localhost:3040/api/v1/product/
+# Content-Type: application/json
+
+# {
+#     "name":"laundry 2.0",
+#     "price" : "23542350",
+#     "description" : "clean clothes maketh the man",
+#     "image_uri" : "https://23423",
+#     "hash": "hgoih2t0934"
+# }
