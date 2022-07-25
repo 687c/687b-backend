@@ -8,7 +8,7 @@
 		"dev": "nodemon server.js",
 		"test": "cross-env NODE_ENV=test jest --verbose --runInBand --force-exit",
 		"build:ui": "rm -rf build && cd ../marketplace-frontend && npm run build --prod && cp -r build ../blogit",
-		"deploy": "git push heroku master",
+		"deploy": "git push heroku main",
 		"deploy:full": "npm run build:ui && git add . && git commit -m 'marketplace-frontend UI build' && npm run deploy"
 	},
 	"keywords": [],
