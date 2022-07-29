@@ -20,6 +20,11 @@ const productSchema = mongoose.Schema({
     sellerAddress : {
         type: String,
         required: true 
+    },
+    paid : {
+        type: Boolean,
+        required: true, 
+        default: false
     }
 });
 

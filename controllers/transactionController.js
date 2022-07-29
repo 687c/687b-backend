@@ -95,15 +95,14 @@ const buyProduct = async (req, res) => {
     }
 }
 
+const confirmPaid = async (req, res) => {
+    const { body } = req;
+    // const product = await Product.findById(body.id);
+    const purchasedProduct = await Product.findByIdAndUpdate(body.id, { paid: true }, { new: true });
 
-
-
-
-
-
-
-
-
+    console.log("purchased, product", purchasedProduct);
+    res.json(purchasedProduct);
+}
 
 /*   TODO 
     * Enable the user to cancel a transaction. useTimeout() of say 10mins  
@@ -111,4 +110,4 @@ const buyProduct = async (req, res) => {
 */
 
 
-module.exports = { buyProduct }
+module.exports = { buyProduct, confirmPaid }
