@@ -20,13 +20,10 @@ const uploadToPinata = async (filePath, name) => {
     };
 
     try {
-        console.log("uploading the file..........");
         const resp = await axios(pinataData);
-
-        console.log("this is the resp", resp);
         return resp;
     } catch (err) {
-        console.log("error pinnning file -> ", err.message);
+        console.error("error pinning file -> ", err.message);
         return err;
     }
 };

@@ -27,7 +27,6 @@ const createProduct = async (req, res) => {
     try {
         const { path, originalname } = file;
         resp = await uploadToPinata(path, originalname);
-        console.log("the pinning resp", resp);
     } catch (err) {
         res.status(500).send({ err: err.message }).end();
         console.error(err);
@@ -58,15 +57,12 @@ const testAuthentication = async (req, res) => {
     const url = "https://api.pinata.cloud/data/testAuthentication";
 
     try {
-        // console.log("here", `${config.PINATA_JWT_KEY}`);
-
         const resp = await axios.get(url, {
             headers: {
                 'Authorization': `Bearer ${config.PINATA_JWT_KEY}`
             }
         });
 
-        console.log(resp.data);
         res.json(resp.data);
     } catch (err) {
         console.error("error testing auth", err.message);

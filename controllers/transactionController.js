@@ -3,8 +3,6 @@ const {
     Connection,
     PublicKey,
     Transaction,
-    SystemProgram,
-    LAMPORTS_PER_SOL
 } = require('@solana/web3.js');
 const { BigNumber } = require('bignumber.js');
 const { createTransferCheckedInstruction, getAssociatedTokenAddress, getMint } = require("@solana/spl-token");
@@ -13,10 +11,8 @@ const Product = require('../models/product'); //for finding the product using id
 
 const buyProduct = async (req, res) => {
     const { body } = req;
-    console.log("this is the body ->", body);
 
     const product = await Product.findById(body.id);
-    console.log("this is the prod found", product);
 
     const buyerAddress = body.buyerPublicKey; //FRONT END CHANGES TOO
 
@@ -69,7 +65,6 @@ const buyProduct = async (req, res) => {
             usdcMint.decimals // The token could have any number of decimals
         );
 
-        // The rest remains the same :)
         transferInstruction.keys.push({
             pubkey: orderId, //make it easier to find the tx
             isSigner: false,
@@ -84,7 +79,6 @@ const buyProduct = async (req, res) => {
 
         const base64 = serializedTransaction.toString("base64");
 
-        res.header("Access-Control-Allow-Origin", "*");
         res.status(200).json({
             transaction: base64,
         });
